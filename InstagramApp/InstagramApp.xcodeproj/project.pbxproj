@@ -13,6 +13,10 @@
 		BA45B28F1CD58B0200E3C1ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA45B28E1CD58B0200E3C1ED /* Assets.xcassets */; };
 		BA45B2921CD58B0200E3C1ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA45B2901CD58B0200E3C1ED /* LaunchScreen.storyboard */; };
 		BA45B2CE1CD58C3400E3C1ED /* InstagramSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA45B2CD1CD58C3400E3C1ED /* InstagramSDK.framework */; };
+		BAC1E4541CD64B450091B108 /* IGTagSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC1E4531CD64B450091B108 /* IGTagSearchTableViewController.swift */; };
+		BAC1E4581CD656DF0091B108 /* IGMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC1E4571CD656DF0091B108 /* IGMediaCell.swift */; };
+		BAC1E4601CD664760091B108 /* IGMediaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC1E45F1CD664760091B108 /* IGMediaListViewController.swift */; };
+		BAC1E4641CD67D830091B108 /* tagResuls.txt in Resources */ = {isa = PBXBuildFile; fileRef = BAC1E4631CD67D830091B108 /* tagResuls.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		BA45B2911CD58B0200E3C1ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA45B2931CD58B0200E3C1ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA45B2CD1CD58C3400E3C1ED /* InstagramSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InstagramSDK.framework; path = "../InstagramSDK/build/Debug-iphoneos/InstagramSDK.framework"; sourceTree = "<group>"; };
+		BAC1E4531CD64B450091B108 /* IGTagSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGTagSearchTableViewController.swift; sourceTree = "<group>"; };
+		BAC1E4571CD656DF0091B108 /* IGMediaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGMediaCell.swift; sourceTree = "<group>"; };
+		BAC1E45F1CD664760091B108 /* IGMediaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGMediaListViewController.swift; sourceTree = "<group>"; };
+		BAC1E4631CD67D830091B108 /* tagResuls.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tagResuls.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,8 +49,8 @@
 		BA45B27B1CD58B0200E3C1ED = {
 			isa = PBXGroup;
 			children = (
-				BA45B2CD1CD58C3400E3C1ED /* InstagramSDK.framework */,
 				BA45B2861CD58B0200E3C1ED /* InstagramApp */,
+				BAC1E4521CD64B180091B108 /* Framework */,
 				BA45B2851CD58B0200E3C1ED /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,7 +66,11 @@
 		BA45B2861CD58B0200E3C1ED /* InstagramApp */ = {
 			isa = PBXGroup;
 			children = (
+				BAC1E4631CD67D830091B108 /* tagResuls.txt */,
 				BA45B2871CD58B0200E3C1ED /* AppDelegate.swift */,
+				BAC1E4531CD64B450091B108 /* IGTagSearchTableViewController.swift */,
+				BAC1E45F1CD664760091B108 /* IGMediaListViewController.swift */,
+				BAC1E4571CD656DF0091B108 /* IGMediaCell.swift */,
 				BA45B2891CD58B0200E3C1ED /* ViewController.swift */,
 				BA45B28B1CD58B0200E3C1ED /* Main.storyboard */,
 				BA45B28E1CD58B0200E3C1ED /* Assets.xcassets */,
@@ -66,6 +78,14 @@
 				BA45B2931CD58B0200E3C1ED /* Info.plist */,
 			);
 			path = InstagramApp;
+			sourceTree = "<group>";
+		};
+		BAC1E4521CD64B180091B108 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				BA45B2CD1CD58C3400E3C1ED /* InstagramSDK.framework */,
+			);
+			name = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA45B2921CD58B0200E3C1ED /* LaunchScreen.storyboard in Resources */,
+				BAC1E4641CD67D830091B108 /* tagResuls.txt in Resources */,
 				BA45B28F1CD58B0200E3C1ED /* Assets.xcassets in Resources */,
 				BA45B28D1CD58B0200E3C1ED /* Main.storyboard in Resources */,
 			);
@@ -141,6 +162,9 @@
 			files = (
 				BA45B28A1CD58B0200E3C1ED /* ViewController.swift in Sources */,
 				BA45B2881CD58B0200E3C1ED /* AppDelegate.swift in Sources */,
+				BAC1E4581CD656DF0091B108 /* IGMediaCell.swift in Sources */,
+				BAC1E4601CD664760091B108 /* IGMediaListViewController.swift in Sources */,
+				BAC1E4541CD64B450091B108 /* IGTagSearchTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +314,7 @@
 				BA45B2981CD58B0200E3C1ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

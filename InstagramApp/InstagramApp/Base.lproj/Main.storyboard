@@ -1,25 +1,183 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nGj-P3-c4v">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <scene sceneID="22q-UI-ZZy">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9uz-0u-6gK" customClass="ViewController" customModule="InstagramApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="AI9-j3-H0n"/>
+                        <viewControllerLayoutGuide type="bottom" id="9pP-nr-1RO"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="3p1-dJ-YdU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="SW7-ZT-q1L"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5bH-DH-P0e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1100.5" y="-248.5"/>
+        </scene>
+        <!--Media List View Controller-->
+        <scene sceneID="Obl-FH-wWX">
+            <objects>
+                <viewController id="6ma-Hk-Rhy" customClass="IGMediaListViewController" customModule="InstagramApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lwh-3e-iA5"/>
+                        <viewControllerLayoutGuide type="bottom" id="yJD-d3-m9C"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="q1y-s6-Jwv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="W31-Xv-kvS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MediaCell" rowHeight="380" id="Bt3-UM-Rvp" customClass="IGMediaCell" customModule="InstagramApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="375" height="380"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bt3-UM-Rvp" id="ueB-pB-cGP">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="379.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hRc-iY-guW">
+                                                    <rect key="frame" x="8" y="8" width="359" height="311.5"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.79541127869999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" priority="999" constant="326" id="pMd-fo-xQ2"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdA-oQ-4lW">
+                                                    <rect key="frame" x="8" y="327.5" width="359" height="44"/>
+                                                    <color key="backgroundColor" red="0.99215686270000003" green="0.60392156860000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="1SC-2w-Ff2"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="hRc-iY-guW" secondAttribute="bottom" constant="60" id="9jE-hC-etP"/>
+                                                <constraint firstItem="hRc-iY-guW" firstAttribute="leading" secondItem="ueB-pB-cGP" secondAttribute="leading" constant="8" id="Q7b-l2-Lt2"/>
+                                                <constraint firstItem="hRc-iY-guW" firstAttribute="top" secondItem="ueB-pB-cGP" secondAttribute="top" constant="8" id="RGN-1R-9Yc"/>
+                                                <constraint firstItem="YdA-oQ-4lW" firstAttribute="leading" secondItem="ueB-pB-cGP" secondAttribute="leading" constant="8" id="TnS-3m-CRp"/>
+                                                <constraint firstAttribute="bottom" secondItem="YdA-oQ-4lW" secondAttribute="bottom" constant="8" id="dvD-dh-yVm"/>
+                                                <constraint firstAttribute="trailing" secondItem="YdA-oQ-4lW" secondAttribute="trailing" constant="8" id="kue-sk-fdM"/>
+                                                <constraint firstAttribute="trailing" secondItem="hRc-iY-guW" secondAttribute="trailing" constant="8" id="w07-UR-fr7"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageHeightConstrain" destination="pMd-fo-xQ2" id="eTa-cn-hed"/>
+                                            <outlet property="mediaImageView" destination="hRc-iY-guW" id="tui-eY-ay9"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="6ma-Hk-Rhy" id="2Qb-Dh-YWS"/>
+                                    <outlet property="delegate" destination="6ma-Hk-Rhy" id="Evl-oh-OZN"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="W31-Xv-kvS" firstAttribute="leading" secondItem="q1y-s6-Jwv" secondAttribute="leading" id="5Og-SW-8Qb"/>
+                            <constraint firstAttribute="trailing" secondItem="W31-Xv-kvS" secondAttribute="trailing" id="ZG3-Hi-3Tn"/>
+                            <constraint firstItem="W31-Xv-kvS" firstAttribute="top" secondItem="q1y-s6-Jwv" secondAttribute="top" id="hlW-rq-0Jd"/>
+                            <constraint firstItem="yJD-d3-m9C" firstAttribute="top" secondItem="W31-Xv-kvS" secondAttribute="bottom" id="psD-cR-v5D"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tableView" destination="W31-Xv-kvS" id="5Mb-R9-OMy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4rN-5h-gPo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1588.5" y="479.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4AA-HG-YNm">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nGj-P3-c4v" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a4v-Vd-Ec3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9uz-0u-6gK" kind="relationship" relationship="rootViewController" id="0Rx-pH-sJ5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rUs-GE-3Uo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="624.5" y="-248.5"/>
+        </scene>
+        <!--Tag Search Table View Controller-->
+        <scene sceneID="gjV-dx-6eG">
+            <objects>
+                <tableViewController id="f8Y-oz-4m1" customClass="IGTagSearchTableViewController" customModule="InstagramApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="byN-kd-4FO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="Xup-dV-YTb">
+                            <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TagCell" id="EgE-jJ-sQu">
+                                <rect key="frame" x="0.0" y="136" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EgE-jJ-sQu" id="unL-mL-7Io">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="f8Y-oz-4m1" id="x1r-nh-e20"/>
+                            <outlet property="delegate" destination="f8Y-oz-4m1" id="Dyv-OI-LvO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="U0O-Ci-eKA"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="searchBar" destination="Xup-dV-YTb" id="fBI-g9-oce"/>
+                        <segue destination="6ma-Hk-Rhy" kind="show" identifier="Test2Segue" id="C1M-Mc-gus"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ab-JV-lcw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1100.5" y="479.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fDh-C1-MAs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kqX-ot-Lc1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QCV-1w-dbo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="f8Y-oz-4m1" kind="relationship" relationship="rootViewController" id="2JN-Ea-90S"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dH0-xa-ZRQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="624.5" y="479.5"/>
         </scene>
     </scenes>
 </document>

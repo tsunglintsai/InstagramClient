@@ -8,14 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		BA45B2C21CD58B5B00E3C1ED /* InstagramSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BA45B2C11CD58B5B00E3C1ED /* InstagramSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BA45B2CC1CD58BDE00E3C1ED /* IGAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45B2CB1CD58BDE00E3C1ED /* IGAuthentication.swift */; };
+		BA45B2D01CD5992800E3C1ED /* IGManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45B2CF1CD5992800E3C1ED /* IGManager.swift */; };
+		BA45B2D21CD59EE400E3C1ED /* IGAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45B2D11CD59EE400E3C1ED /* IGAuthViewController.swift */; };
+		BA45B2D41CD59F8A00E3C1ED /* IGAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA45B2D31CD59F8A00E3C1ED /* IGAuthViewController.xib */; };
+		BA45B2D61CD5A55600E3C1ED /* IGAuthPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45B2D51CD5A55600E3C1ED /* IGAuthPermission.swift */; };
+		BA45B2D81CD5C09100E3C1ED /* IGAuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45B2D71CD5C09100E3C1ED /* IGAuthState.swift */; };
+		BAC1E4681CD699080091B108 /* IGMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC1E4671CD699080091B108 /* IGMedia.swift */; };
+		BAC1E46A1CD699F00091B108 /* IGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC1E4691CD699F00091B108 /* IGImage.swift */; };
+		BAC1E46C1CD69B6E0091B108 /* IGImageResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC1E46B1CD69B6E0091B108 /* IGImageResolution.swift */; };
+		BAC1E46E1CD6E0340091B108 /* IGMediaListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC1E46D1CD6E0340091B108 /* IGMediaListResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BA45B2BE1CD58B5B00E3C1ED /* InstagramSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = InstagramSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA45B2C11CD58B5B00E3C1ED /* InstagramSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstagramSDK.h; sourceTree = "<group>"; };
 		BA45B2C31CD58B5B00E3C1ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BA45B2CB1CD58BDE00E3C1ED /* IGAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGAuthentication.swift; sourceTree = "<group>"; };
+		BA45B2CF1CD5992800E3C1ED /* IGManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGManager.swift; sourceTree = "<group>"; };
+		BA45B2D11CD59EE400E3C1ED /* IGAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGAuthViewController.swift; sourceTree = "<group>"; };
+		BA45B2D31CD59F8A00E3C1ED /* IGAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGAuthViewController.xib; sourceTree = "<group>"; };
+		BA45B2D51CD5A55600E3C1ED /* IGAuthPermission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGAuthPermission.swift; sourceTree = "<group>"; };
+		BA45B2D71CD5C09100E3C1ED /* IGAuthState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGAuthState.swift; sourceTree = "<group>"; };
+		BAC1E4671CD699080091B108 /* IGMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGMedia.swift; sourceTree = "<group>"; };
+		BAC1E4691CD699F00091B108 /* IGImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGImage.swift; sourceTree = "<group>"; };
+		BAC1E46B1CD69B6E0091B108 /* IGImageResolution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGImageResolution.swift; sourceTree = "<group>"; };
+		BAC1E46D1CD6E0340091B108 /* IGMediaListResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGMediaListResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,11 +64,27 @@
 		BA45B2C01CD58B5B00E3C1ED /* InstagramSDK */ = {
 			isa = PBXGroup;
 			children = (
+				BAC1E4511CD64AEC0091B108 /* Enum */,
 				BA45B2C11CD58B5B00E3C1ED /* InstagramSDK.h */,
-				BA45B2CB1CD58BDE00E3C1ED /* IGAuthentication.swift */,
+				BAC1E4671CD699080091B108 /* IGMedia.swift */,
+				BAC1E46D1CD6E0340091B108 /* IGMediaListResponse.swift */,
+				BAC1E4691CD699F00091B108 /* IGImage.swift */,
+				BA45B2CF1CD5992800E3C1ED /* IGManager.swift */,
+				BA45B2D11CD59EE400E3C1ED /* IGAuthViewController.swift */,
+				BA45B2D31CD59F8A00E3C1ED /* IGAuthViewController.xib */,
 				BA45B2C31CD58B5B00E3C1ED /* Info.plist */,
 			);
 			path = InstagramSDK;
+			sourceTree = "<group>";
+		};
+		BAC1E4511CD64AEC0091B108 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				BA45B2D51CD5A55600E3C1ED /* IGAuthPermission.swift */,
+				BA45B2D71CD5C09100E3C1ED /* IGAuthState.swift */,
+				BAC1E46B1CD69B6E0091B108 /* IGImageResolution.swift */,
+			);
+			name = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +155,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA45B2D41CD59F8A00E3C1ED /* IGAuthViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +166,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA45B2CC1CD58BDE00E3C1ED /* IGAuthentication.swift in Sources */,
+				BAC1E46C1CD69B6E0091B108 /* IGImageResolution.swift in Sources */,
+				BA45B2D21CD59EE400E3C1ED /* IGAuthViewController.swift in Sources */,
+				BA45B2D01CD5992800E3C1ED /* IGManager.swift in Sources */,
+				BAC1E4681CD699080091B108 /* IGMedia.swift in Sources */,
+				BA45B2D61CD5A55600E3C1ED /* IGAuthPermission.swift in Sources */,
+				BA45B2D81CD5C09100E3C1ED /* IGAuthState.swift in Sources */,
+				BAC1E46A1CD699F00091B108 /* IGImage.swift in Sources */,
+				BAC1E46E1CD6E0340091B108 /* IGMediaListResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +323,7 @@
 				BA45B2C81CD58B5B00E3C1ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

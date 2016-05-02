@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import InstagramSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        IGManager.configIGManager("44cfd11666ed4e9183ddd19bdc1b708f", redirectURL: "https://www.instagram.com/henrytsaiint0403/", permissions: Set([.PublicContent,.Likes]) )
         return true
     }
 

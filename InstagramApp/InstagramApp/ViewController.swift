@@ -10,11 +10,27 @@ import UIKit
 import InstagramSDK
 
 class ViewController: UIViewController {
-
+    var viewController: IGAuthViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
-        let p = IGAuthentication()
-        print(p.getNumber())
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+//        viewController = IGManager.sharedInstance.authViewController()
+//        if let viewController = viewController {
+//            viewController.view.frame = view.bounds
+//            let navController = UINavigationController(rootViewController: viewController)
+//            viewController.startAuth({ (state) -> () in
+//                print(state)
+//                print(IGManager.sharedInstance.accessToken)
+//
+//            })
+//            self.presentViewController(navController, animated: true) { () -> Void in
+//                
+//            }
+//        }
+        IGManager.sharedInstance.queryMedia("test")
     }
 
 
