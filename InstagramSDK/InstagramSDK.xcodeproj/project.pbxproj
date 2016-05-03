@@ -10,9 +10,12 @@
 		BA45B2C21CD58B5B00E3C1ED /* InstagramSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BA45B2C11CD58B5B00E3C1ED /* InstagramSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA45B2D01CD5992800E3C1ED /* IGManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45B2CF1CD5992800E3C1ED /* IGManager.swift */; };
 		BA45B2D21CD59EE400E3C1ED /* IGAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45B2D11CD59EE400E3C1ED /* IGAuthViewController.swift */; };
-		BA45B2D41CD59F8A00E3C1ED /* IGAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA45B2D31CD59F8A00E3C1ED /* IGAuthViewController.xib */; };
 		BA45B2D61CD5A55600E3C1ED /* IGAuthPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45B2D51CD5A55600E3C1ED /* IGAuthPermission.swift */; };
 		BA45B2D81CD5C09100E3C1ED /* IGAuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45B2D71CD5C09100E3C1ED /* IGAuthState.swift */; };
+		BA62E1DD1CD6E8290076047C /* JSONHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA62E1DC1CD6E8290076047C /* JSONHelper.framework */; };
+		BA7A17401CD6F99F00DC2250 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA7A173F1CD6F99F00DC2250 /* AFNetworking.framework */; };
+		BA7A17421CD7205D00DC2250 /* IGAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA7A17411CD7205D00DC2250 /* IGAuthViewController.xib */; };
+		BA7A17441CD7BF4D00DC2250 /* IGUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7A17431CD7BF4D00DC2250 /* IGUser.swift */; };
 		BAC1E4681CD699080091B108 /* IGMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC1E4671CD699080091B108 /* IGMedia.swift */; };
 		BAC1E46A1CD699F00091B108 /* IGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC1E4691CD699F00091B108 /* IGImage.swift */; };
 		BAC1E46C1CD69B6E0091B108 /* IGImageResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC1E46B1CD69B6E0091B108 /* IGImageResolution.swift */; };
@@ -25,9 +28,12 @@
 		BA45B2C31CD58B5B00E3C1ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA45B2CF1CD5992800E3C1ED /* IGManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGManager.swift; sourceTree = "<group>"; };
 		BA45B2D11CD59EE400E3C1ED /* IGAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGAuthViewController.swift; sourceTree = "<group>"; };
-		BA45B2D31CD59F8A00E3C1ED /* IGAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGAuthViewController.xib; sourceTree = "<group>"; };
 		BA45B2D51CD5A55600E3C1ED /* IGAuthPermission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGAuthPermission.swift; sourceTree = "<group>"; };
 		BA45B2D71CD5C09100E3C1ED /* IGAuthState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGAuthState.swift; sourceTree = "<group>"; };
+		BA62E1DC1CD6E8290076047C /* JSONHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONHelper.framework; path = "/Users/Henry/Dropbox/Documents/[Project]/InstagramClient/Pods/../build/Debug-iphoneos/JSONHelper.framework"; sourceTree = "<absolute>"; };
+		BA7A173F1CD6F99F00DC2250 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = "/Users/Henry/Dropbox/Documents/[Project]/InstagramClient/Pods/../build/Debug-iphoneos/AFNetworking.framework"; sourceTree = "<absolute>"; };
+		BA7A17411CD7205D00DC2250 /* IGAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGAuthViewController.xib; sourceTree = "<group>"; };
+		BA7A17431CD7BF4D00DC2250 /* IGUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGUser.swift; sourceTree = "<group>"; };
 		BAC1E4671CD699080091B108 /* IGMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGMedia.swift; sourceTree = "<group>"; };
 		BAC1E4691CD699F00091B108 /* IGImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGImage.swift; sourceTree = "<group>"; };
 		BAC1E46B1CD69B6E0091B108 /* IGImageResolution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGImageResolution.swift; sourceTree = "<group>"; };
@@ -39,6 +45,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA7A17401CD6F99F00DC2250 /* AFNetworking.framework in Frameworks */,
+				BA62E1DD1CD6E8290076047C /* JSONHelper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +56,8 @@
 		BA45B2B41CD58B5B00E3C1ED = {
 			isa = PBXGroup;
 			children = (
+				BA7A173F1CD6F99F00DC2250 /* AFNetworking.framework */,
+				BA62E1DE1CD6E8340076047C /* Framework */,
 				BA45B2C01CD58B5B00E3C1ED /* InstagramSDK */,
 				BA45B2BF1CD58B5B00E3C1ED /* Products */,
 			);
@@ -66,15 +76,24 @@
 			children = (
 				BAC1E4511CD64AEC0091B108 /* Enum */,
 				BA45B2C11CD58B5B00E3C1ED /* InstagramSDK.h */,
+				BA7A17431CD7BF4D00DC2250 /* IGUser.swift */,
 				BAC1E4671CD699080091B108 /* IGMedia.swift */,
 				BAC1E46D1CD6E0340091B108 /* IGMediaListResponse.swift */,
 				BAC1E4691CD699F00091B108 /* IGImage.swift */,
 				BA45B2CF1CD5992800E3C1ED /* IGManager.swift */,
 				BA45B2D11CD59EE400E3C1ED /* IGAuthViewController.swift */,
-				BA45B2D31CD59F8A00E3C1ED /* IGAuthViewController.xib */,
+				BA7A17411CD7205D00DC2250 /* IGAuthViewController.xib */,
 				BA45B2C31CD58B5B00E3C1ED /* Info.plist */,
 			);
 			path = InstagramSDK;
+			sourceTree = "<group>";
+		};
+		BA62E1DE1CD6E8340076047C /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				BA62E1DC1CD6E8290076047C /* JSONHelper.framework */,
+			);
+			name = Framework;
 			sourceTree = "<group>";
 		};
 		BAC1E4511CD64AEC0091B108 /* Enum */ = {
@@ -155,7 +174,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA45B2D41CD59F8A00E3C1ED /* IGAuthViewController.xib in Resources */,
+				BA7A17421CD7205D00DC2250 /* IGAuthViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +189,7 @@
 				BA45B2D21CD59EE400E3C1ED /* IGAuthViewController.swift in Sources */,
 				BA45B2D01CD5992800E3C1ED /* IGManager.swift in Sources */,
 				BAC1E4681CD699080091B108 /* IGMedia.swift in Sources */,
+				BA7A17441CD7BF4D00DC2250 /* IGUser.swift in Sources */,
 				BA45B2D61CD5A55600E3C1ED /* IGAuthPermission.swift in Sources */,
 				BA45B2D81CD5C09100E3C1ED /* IGAuthState.swift in Sources */,
 				BAC1E46A1CD699F00091B108 /* IGImage.swift in Sources */,

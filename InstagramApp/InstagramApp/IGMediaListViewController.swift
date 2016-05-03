@@ -8,10 +8,17 @@
 
 import UIKit
 import InstagramSDK
+import SDWebImage
 
 class IGMediaListViewController: UIViewController {
-    let mediaCellIdentifier = "MediaCell"
-    
+    private let mediaCellIdentifier = "MediaCell"
+    private let userListSegueIdentifier = "UserListSegue"
+    private var mediaList = [IGMedia]()
+    var tag: String? {
+        didSet {
+            reloadData()
+        }
+    }
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.estimatedRowHeight = 300
@@ -24,26 +31,100 @@ class IGMediaListViewController: UIViewController {
 extension IGMediaListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        reloadData()
+    }
+}
+
+//MARK: UI component
+extension IGMediaListViewController {
+    func handleGetListFailure() {
+        let alert = UIAlertController(title: "Can't retreive info", message: "We can't retreive user list info", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { [weak self] (action) -> Void in
+            guard let _self = self else { return }
+            _self.navigationController?.popToViewController(_self, animated: true)
+        }))
+        presentViewController(alert, animated: true, completion: nil)
+        navigationController?.popToViewController(self, animated: true)
+    }
+}
+//MARK: Events
+extension IGMediaListViewController {
+    func setupMediaCellEvents(cell:IGMediaCell , media:IGMedia) {
+        cell.didTapLikeButtonClosure = { [weak self] ()->() in
+            var newMedia = media
+            newMedia.userHasLike = !media.userHasLike
+            if newMedia.userHasLike {
+                newMedia.likes++
+            } else {
+                newMedia.likes--
+            }
+            guard let mediaIndex = self?.mediaList.indexOf({$0.mediaId == media.mediaId}),
+                let cellIndexPath = self?.tableView.indexPathForCell(cell)
+                else { return }
+            self?.mediaList[mediaIndex] = newMedia
+            self?.tableView.reloadRowsAtIndexPaths([cellIndexPath], withRowAnimation: .None)
+            if let medieaId = cell.mediaId {
+                IGManager.sharedInstance.likeUnlikeMedia(medieaId, like: newMedia.userHasLike, successClosure: { () -> () in
+                    // don't need to do anything if transaction success
+                }, failureClosure: { () -> () in
+                    // roll back to previous state if transaction fail
+                    if cell.mediaId == media.mediaId {
+                        self?.mediaList[mediaIndex] = media
+                        self?.tableView.reloadRowsAtIndexPaths([cellIndexPath], withRowAnimation: .None)
+                    }
+                })
+            }
+        }
+        
+        cell.didTapNumberOfLikeButtonClosure = { [weak self] ()->() in
+            self?.performSegueWithIdentifier("UserListSegue", sender: cell)
+        }
+    }
+}
+//MARK: Model data
+extension IGMediaListViewController {
+    func reloadData() {
+        guard let tag = tag else { return }
+        IGManager.sharedInstance.queryMedia(tag, successClosure: { [weak self] (response) -> () in
+            self?.mediaList = response.mediaList
+            self?.tableView.reloadData()
+        }) { [weak self] () -> () in
+            self?.handleGetListFailure()
+        }
+    }
+}
+
+//MARK: Segue
+extension IGMediaListViewController {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == userListSegueIdentifier {
+            guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPathForCell(cell) else { return }
+            let media = mediaList[indexPath.row]
+            if let mediaId = media.mediaId {
+                IGManager.sharedInstance.getMediaLikes(mediaId, successClosure: { (users) -> () in
+                    if let userListViewController = segue.destinationViewController as? IGUserListTableViewController {
+                        userListViewController.userList = users
+                    }
+                }, failureClosure: { [weak self]  () -> () in
+                    self?.handleGetListFailure()
+                })
+            }
+        }
     }
 }
 
 //MARK: UITableViewDatasource
 extension IGMediaListViewController: UITableViewDataSource {
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return mediaList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(mediaCellIdentifier) as? IGMediaCell else { return UITableViewCell() }
-        cell.imageHeightConstrain.constant = CGFloat(100 * ((indexPath.row % 2) + 1))
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(mediaCellIdentifier) as? IGMediaCell
+            else { return UITableViewCell() }
+        let media = mediaList[indexPath.row]
+        cell.updateCellWithMedia(media, imageWidth: self.tableView.frame.width)
+        setupMediaCellEvents(cell, media: media)
         return cell
-    }
-    
-}
-
-//MARK: UITableViewDelegate
-extension IGMediaListViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     }
 }

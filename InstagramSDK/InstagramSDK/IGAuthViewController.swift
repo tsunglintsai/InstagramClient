@@ -9,21 +9,21 @@
 import UIKit
 
 public class IGAuthViewController: UIViewController {
-    @IBOutlet weak var webView: UIWebView!
+    let webView = UIWebView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     let authRootURL = NSURL(string:"https://www.instagram.com/oauth/authorize/")!
     let clientId: String
     let redirectURL: NSURL
     let userPermission: Set<IGAuthPermission>
-    let authURL: NSURL
     let authSucessString = "access_token="
     let authFailString = "error_reason="
+    private var authURL: NSURL?
     var internalAuthSuccessClosure: ((accessToken: String)->())?
-    var authSuccessClosure: (()->())?
-    var authFailClosure: (()->())?
-    var authStateChangeClosure: ((state:IGAuthState)->())?
-    var authState: IGAuthState = .PendingStart
-    var hasReportSucessOrFaile = false
-    var hasReportUserPending = false
+    public var authSuccessClosure: (()->())?
+    public var authFailClosure: (()->())?
+    public var authStateChangeClosure: ((state:IGAuthState)->())?
+    public var authState: IGAuthState = .PendingStart
+    public var hasReportSucessOrFaile = false
+    public var hasReportUserPending = false
     
     public init?(clientId:String, redirectURL: NSURL, userPermission: Set<IGAuthPermission>) {
         self.clientId = clientId
@@ -42,13 +42,8 @@ public class IGAuthViewController: UIViewController {
             if let url = urlComponents.URL {
                 self.authURL = url
                 hasValidAuthURL = true
-            } else {
-                self.authURL = NSURL()
             }
-        } else {
-            self.authURL = NSURL()
         }
-        
         super.init(nibName: "\(self.dynamicType)".componentsSeparatedByString(".").last, bundle: NSBundle(forClass: self.dynamicType))
         if !hasValidAuthURL {
             return nil
@@ -66,6 +61,9 @@ public class IGAuthViewController: UIViewController {
 //MARK: Auth action
 public extension IGAuthViewController {
     public func startAuth(stateChangeClosure:((state:IGAuthState)->())) {
+        guard let authURL = authURL,
+            let _ = view
+            else { return }
         authState = .PendingStart
         hasReportSucessOrFaile = false
         hasReportUserPending = false
@@ -116,15 +114,20 @@ extension IGAuthViewController: UIWebViewDelegate {
 extension IGAuthViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.blueColor()
         setupWebView()
+        edgesForExtendedLayout = .None
     }
 }
 
 //MARK: Component Init
 private extension IGAuthViewController {
     func setupWebView() {
+        webView.frame = view.bounds
         webView.delegate = self
         webView.scrollView.scrollEnabled = false
+        webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        view.addSubview(webView)
     }
 }
 
