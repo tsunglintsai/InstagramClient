@@ -36,6 +36,7 @@ extension IGMediaListViewController {
         super.viewDidLoad()
         setupHud()
         reloadData()
+        title = tag
     }
 }
 

@@ -17,17 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         IGManager.configIGManager("44cfd11666ed4e9183ddd19bdc1b708f", redirectURL: "https://www.instagram.com/henrytsaiint0403/", permissions: Set([.PublicContent,.Likes]) )
         IGManager.sharedInstance.authRequireUserInputClosure = { [weak self] (authViewController)->() in
-            guard let rootViewController = self?.window?.rootViewController else {
-                return
+            self?.showAuthDialog(authViewController)
+            authViewController.authFailClosure = {
+                authViewController.startAuth({ (state) -> () in })
             }
-            authViewController.authSuccessClosure = {
-                rootViewController.dismissViewControllerAnimated(true, completion: nil)
-            }
-            let navController = UINavigationController(rootViewController: authViewController)
-            navController.navigationBar.translucent = false
-            rootViewController.presentViewController(navController, animated: true, completion: { () -> Void in })
         }
         return true
+    }
+    
+    func showAuthDialog(authViewController: IGAuthViewController) {
+        guard let rootViewController = window?.rootViewController else {
+            return
+        }
+        rootViewController.dismissViewControllerAnimated(false, completion: nil)
+        authViewController.authSuccessClosure = {
+            rootViewController.dismissViewControllerAnimated(true, completion: nil)
+        }
+        let navController = UINavigationController(rootViewController: authViewController)
+        navController.navigationBar.translucent = false
+        rootViewController.presentViewController(navController, animated: true, completion: { () -> Void in })
     }
 
     func applicationWillResignActive(application: UIApplication) {

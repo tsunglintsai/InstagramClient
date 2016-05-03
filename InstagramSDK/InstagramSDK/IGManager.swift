@@ -67,14 +67,17 @@ public class IGManager: NSObject {
         }
         return viewController
     }
-    
+
+}
+//MARK: API mapping
+extension IGManager {
     public func queryTag(keyword: String , successClosure: QueryTagSuccessCompletionClosure, failureClosure: QueryTagFailCompletionClosure) {
         runGET("tags/search", parameters: ["q":keyword], progress: nil, success: { (task, response) -> Void in
             guard let responseJson = response, dataJson = responseJson["data"] as? [AnyObject] else { failureClosure() ; return }
             let tags = dataJson.flatMap({$0["name"]}).flatMap({$0 as? String})
             successClosure(tagList: tags, keyword: keyword)
-        }) { (task, error) -> Void in
-            failureClosure()
+            }) { (task, error) -> Void in
+                failureClosure()
         }
     }
     
@@ -85,8 +88,8 @@ public class IGManager: NSObject {
             if let mediaListResponse = mediaListResponse {
                 successClosure(response: mediaListResponse)
             }
-        }) { (task, error) -> Void in
-            failureClosure()
+            }) { (task, error) -> Void in
+                failureClosure()
         }
     }
     
@@ -94,18 +97,18 @@ public class IGManager: NSObject {
         if like {
             runPOST("media/\(mediaId)/likes", parameters: nil, progress: nil, success: { (task, response) -> Void in
                 successClosure()
-            }) { (task, error) -> Void in
-                failureClosure()
+                }) { (task, error) -> Void in
+                    failureClosure()
             }
         } else {
             runDELETE("media/\(mediaId)/likes", parameters:nil, success: { (task, response) -> Void in
                 successClosure()
-            }, failure: { (task, error) -> Void in
-                failureClosure()
+                }, failure: { (task, error) -> Void in
+                    failureClosure()
             })
         }
     }
- 
+    
     public func getMediaLikes(mediaId: String ,successClosure: GetMediaLikesSuccesCompletionClosure, failureClosure: GetMediaLikesFailCompletionClosure) {
         runGET("media/\(mediaId)/likes", parameters: nil, progress: nil, success: { (task, response) -> Void in
             guard let responseJson = response, let userListJson = responseJson["data"]
@@ -120,29 +123,14 @@ public class IGManager: NSObject {
             } else{
                 failureClosure()
             }
-        }) { (task, error) -> Void in
-            print(error)
-            failureClosure()
+            }) { (task, error) -> Void in
+                print(error)
+                failureClosure()
         }
     }
-    
-    private func runClosureAfterReauth(successSlosure:(()->()), failClosure:(()->())) {
-        guard let internalAuthViewController = internalAuthViewController else {
-            failClosure()
-            return
-        }
-        internalAuthViewController.startAuth({ [weak self] (state) -> () in
-            guard state == .Authorized else {
-                if state == .PendingUserInput {
-                    self?.authRequireUserInputClosure?(internalAuthViewController: internalAuthViewController)
-                }
-                failClosure()
-                return
-            }
-            successSlosure()
-        })
-    }
-    
+}
+//MARK: network call proxy
+extension IGManager {
     private func runDELETE(URLString: String, parameters: AnyObject?, success: ((NSURLSessionDataTask, AnyObject?) -> Void)?, failure: ((NSURLSessionDataTask?, NSError) -> Void)?) {
         httpManager.DELETE(URLString, parameters: paramWithAccessToken(parameters), success: success) { [weak self] (task, error) -> Void in
             if let response = task?.response as? NSHTTPURLResponse {
@@ -185,9 +173,6 @@ public class IGManager: NSObject {
     
     private func runGET(URLString: String, parameters: AnyObject?, progress downloadProgress: ((NSProgress) -> Void)?, success: ((NSURLSessionDataTask, AnyObject?) -> Void)?, failure: ((NSURLSessionDataTask?, NSError) -> Void)?) {
         httpManager.GET(URLString, parameters: paramWithAccessToken(parameters), progress: downloadProgress, success: success) { [weak self] (task, error) -> Void in
-            print(task)
-            print("================================================")
-            print(error)
             if let response = task?.response as? NSHTTPURLResponse {
                 if response.statusCode == 400 {
                     // need reauth
@@ -204,6 +189,23 @@ public class IGManager: NSObject {
                 failure?(task,error)
             }
         }
+    }
+    
+    private func runClosureAfterReauth(successSlosure:(()->()), failClosure:(()->())) {
+        guard let internalAuthViewController = internalAuthViewController else {
+            failClosure()
+            return
+        }
+        internalAuthViewController.startAuth({ [weak self] (state) -> () in
+            guard state == .Authorized else {
+                if state == .PendingUserInput {
+                    self?.authRequireUserInputClosure?(internalAuthViewController: internalAuthViewController)
+                }
+                failClosure()
+                return
+            }
+            successSlosure()
+            })
     }
     
     private func paramWithAccessToken(parameters: AnyObject?) -> [String: AnyObject]{
