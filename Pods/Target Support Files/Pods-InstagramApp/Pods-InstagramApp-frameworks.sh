@@ -85,15 +85,15 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-InstagramApp/AFNetworking.framework"
-  install_framework "Pods-InstagramApp/JNKeychain.framework"
+  install_framework "Pods-InstagramApp/DZNEmptyDataSet.framework"
   install_framework "Pods-InstagramApp/JSONHelper.framework"
-  install_framework "Pods-InstagramApp/OHHTTPStubs.framework"
+  install_framework "Pods-InstagramApp/MBProgressHUD.framework"
   install_framework "Pods-InstagramApp/SDWebImage.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-InstagramApp/AFNetworking.framework"
-  install_framework "Pods-InstagramApp/JNKeychain.framework"
+  install_framework "Pods-InstagramApp/DZNEmptyDataSet.framework"
   install_framework "Pods-InstagramApp/JSONHelper.framework"
-  install_framework "Pods-InstagramApp/OHHTTPStubs.framework"
+  install_framework "Pods-InstagramApp/MBProgressHUD.framework"
   install_framework "Pods-InstagramApp/SDWebImage.framework"
 fi

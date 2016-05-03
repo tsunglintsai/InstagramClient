@@ -21,13 +21,6 @@ class IGUserListTableViewController: UITableViewController {
     }
 }
 
-//MARK: View life cycle
-extension IGUserListTableViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-}
-
 //MARK: UITableViewDatasource
 extension IGUserListTableViewController {
     

@@ -9,11 +9,13 @@
 import UIKit
 import InstagramSDK
 import SDWebImage
+import MBProgressHUD
 
 class IGMediaListViewController: UIViewController {
     private let mediaCellIdentifier = "MediaCell"
     private let userListSegueIdentifier = "UserListSegue"
     private var mediaList = [IGMedia]()
+    private var hud: MBProgressHUD?
     var tag: String? {
         didSet {
             reloadData()
@@ -23,6 +25,7 @@ class IGMediaListViewController: UIViewController {
         didSet {
             tableView.estimatedRowHeight = 300
             tableView.rowHeight = UITableViewAutomaticDimension
+            tableView.tableFooterView = UIView()
         }
     }
 }
@@ -31,6 +34,7 @@ class IGMediaListViewController: UIViewController {
 extension IGMediaListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupHud()
         reloadData()
     }
 }
@@ -45,6 +49,14 @@ extension IGMediaListViewController {
         }))
         presentViewController(alert, animated: true, completion: nil)
         navigationController?.popToViewController(self, animated: true)
+    }
+    func handleLikeFailure() {
+        let alert = UIAlertController(title: "Can't give feedback", message: "We submit feedback at this point. please try again later", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { [weak self] (action) -> Void in
+            guard let _self = self else { return }
+            _self.navigationController?.popToViewController(_self, animated: true)
+            }))
+        presentViewController(alert, animated: true, completion: nil)
     }
 }
 //MARK: Events
@@ -72,6 +84,7 @@ extension IGMediaListViewController {
                         self?.mediaList[mediaIndex] = media
                         self?.tableView.reloadRowsAtIndexPaths([cellIndexPath], withRowAnimation: .None)
                     }
+                    self?.handleLikeFailure()
                 })
             }
         }
@@ -85,11 +98,14 @@ extension IGMediaListViewController {
 extension IGMediaListViewController {
     func reloadData() {
         guard let tag = tag else { return }
+        showLoadingIndicator()
         IGManager.sharedInstance.queryMedia(tag, successClosure: { [weak self] (response) -> () in
             self?.mediaList = response.mediaList
             self?.tableView.reloadData()
+            self?.hideLoadingIndicator()
         }) { [weak self] () -> () in
             self?.handleGetListFailure()
+            self?.hideLoadingIndicator()
         }
     }
 }
@@ -128,3 +144,26 @@ extension IGMediaListViewController: UITableViewDataSource {
         return cell
     }
 }
+
+//MARK: MBProgressHUDDelegate
+extension IGMediaListViewController: MBProgressHUDDelegate {
+    func setupHud() {
+        hud = MBProgressHUD(view: tableView)
+        guard let hud = hud else { return }
+        hud.dimBackground = true
+        hud.delegate = self
+    }
+    
+    func showLoadingIndicator() {
+        guard let hud = hud else { return }
+        tableView.addSubview(hud)
+        hud.show(true)
+    }
+    
+    func hideLoadingIndicator() {
+        guard let hud = hud else { return }
+        hud.hide(true, afterDelay: 500)
+        hud.removeFromSuperview()
+    }
+}
+

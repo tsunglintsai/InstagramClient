@@ -8,39 +8,57 @@
 
 import UIKit
 import InstagramSDK
+import DZNEmptyDataSet
 
 class IGTagSearchTableViewController: UITableViewController {
     private let cellIdentifier = "TagCell"
     private let mediaListSegueIdentifier = "MediaListSegue"
     private var tagList = [String]()
-    @IBOutlet weak var searchBar: UISearchBar!
-    
+    private let spinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet{
+            spinner.frame = CGRectMake(12, (searchBar.frame.height - spinner.frame.height) / 2.0 , spinner.frame.width, spinner.frame.height)
+            searchBar.addSubview(spinner)
+            hideSpinner()
+        }
+    }
 }
 
 //MARK: View life cycle
 extension IGTagSearchTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupEmptyDataSet()
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+}
+
+//MARK: DZNEmptyDataSet
+extension IGTagSearchTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "Type keyword to search for tags")
     }
+
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "hashtag_icon")
+    }
+
 }
 
 //MARK: Events
 extension IGTagSearchTableViewController {
     func searchTag(keyword:String) {
+        showSpinner()
         IGManager.sharedInstance.queryTag(keyword, successClosure: { [weak self] (tagList,keyword) -> () in
             // return could in different order, we drop result which doens't matches current search keyword
             guard self?.searchBar.text == keyword else { return }
             self?.tagList = tagList
             self?.tableView.reloadData()
+            self?.hideSpinner()
         }) { [weak self] () -> () in
             self?.tagList = [String]()
             self?.tableView.reloadData()
             self?.showSimpleAlert("Error", content: "Error when performing search, please try again later")
+            self?.hideSpinner()
         }
     }
 }
@@ -51,6 +69,23 @@ extension IGTagSearchTableViewController {
         let alert = UIAlertController(title: title, message: content, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: buttonText, style: UIAlertActionStyle.Default, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    //DZNEmptyDataSet
+    func setupEmptyDataSet() {
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.tableFooterView = UIView()
+    }
+    
+    func showSpinner() {
+        spinner.hidden = false
+        spinner.startAnimating()
+    }
+    
+    func hideSpinner() {
+        spinner.stopAnimating()
+        spinner.hidden = true
     }
 }
 

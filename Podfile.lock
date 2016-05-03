@@ -14,37 +14,25 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - JNKeychain (0.1.4)
+  - DZNEmptyDataSet (1.8)
   - JSONHelper (1.7.0)
-  - OHHTTPStubs (5.0.0):
-    - OHHTTPStubs/Default (= 5.0.0)
-  - OHHTTPStubs/Core (5.0.0)
-  - OHHTTPStubs/Default (5.0.0):
-    - OHHTTPStubs/Core
-    - OHHTTPStubs/JSON
-    - OHHTTPStubs/NSURLSession
-    - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.0.0):
-    - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.0.0):
-    - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.0.0)
+  - MBProgressHUD (0.9.2)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
-  - JNKeychain
+  - DZNEmptyDataSet
   - JSONHelper
-  - OHHTTPStubs
+  - MBProgressHUD (~> 0.9.2)
   - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  JNKeychain: fb6cc9ec95959ba46cd95d0ee6f7a05e41da9f42
+  DZNEmptyDataSet: d2351b2e8daefa40433ef292e246e21f6be31a7b
   JSONHelper: b71808273ac60fb9e1878eb115370b0faac14a81
-  OHHTTPStubs: a5d2e9eea07869d42ec03338325f398bc520e159
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
 
 COCOAPODS: 0.39.0

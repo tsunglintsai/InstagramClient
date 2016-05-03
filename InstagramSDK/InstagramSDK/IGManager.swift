@@ -69,72 +69,45 @@ public class IGManager: NSObject {
     }
     
     public func queryTag(keyword: String , successClosure: QueryTagSuccessCompletionClosure, failureClosure: QueryTagFailCompletionClosure) {
-        guard let accessToken = accessToken else {
-            runClosureAfterReauth({[weak self] () -> () in
-                self?.queryTag(keyword, successClosure: successClosure, failureClosure: failureClosure)
-            }, failClosure: { () -> () in
-                failureClosure()
-            })
-            return
-        }
-        httpManager.GET("tags/search", parameters: ["access_token":accessToken, "q":keyword], progress: nil, success: { (dataTask, response) -> Void in
+        runGET("tags/search", parameters: ["q":keyword], progress: nil, success: { (task, response) -> Void in
             guard let responseJson = response, dataJson = responseJson["data"] as? [AnyObject] else { failureClosure() ; return }
             let tags = dataJson.flatMap({$0["name"]}).flatMap({$0 as? String})
             successClosure(tagList: tags, keyword: keyword)
-        }) { (dataTask, error) -> Void in
+        }) { (task, error) -> Void in
             failureClosure()
         }
     }
     
     public func queryMedia(tag: String , successClosure: QueryMediaSuccessCompletionClosure, failureClosure: QueryMediaFailCompletionClosure) {
-        guard let accessToken = accessToken else {
-            runClosureAfterReauth({[weak self] () -> () in
-                self?.queryMedia(tag, successClosure: successClosure, failureClosure: failureClosure)
-            }, failClosure: { () -> () in
-                failureClosure()
-            })
-            return
-        }
-        httpManager.GET("tags/sun/media/recent", parameters: ["access_token":accessToken], progress: nil, success: { (dataTask, response) -> Void in
-            if let responseJson = response {
-                var mediaListResponse: IGMediaListResponse?
-                mediaListResponse <-- responseJson
-                if let mediaListResponse = mediaListResponse {
-                    successClosure(response: mediaListResponse)
-                }
-            } else {
-                failureClosure()
+        runGET("tags/sun/media/recent", parameters:nil, progress: nil, success: { (task, response) -> Void in
+            var mediaListResponse: IGMediaListResponse?
+            mediaListResponse <-- response
+            if let mediaListResponse = mediaListResponse {
+                successClosure(response: mediaListResponse)
             }
-        }) { (dataTask, error) -> Void in
+        }) { (task, error) -> Void in
             failureClosure()
         }
     }
     
     public func likeUnlikeMedia(mediaId: String , like:Bool ,successClosure: LikeMediaSuccesCompletionClosure, failureClosure: LikeMediaFailCompletionClosure) {
-        guard let accessToken = accessToken else {
-            return
-        }
         if like {
-            httpManager.POST("media/\(mediaId)/likes", parameters: ["access_token":accessToken], progress: nil, success: { (task, response) -> Void in
+            runPOST("media/\(mediaId)/likes", parameters: nil, progress: nil, success: { (task, response) -> Void in
                 successClosure()
             }) { (task, error) -> Void in
                 failureClosure()
             }
         } else {
-            httpManager.DELETE("media/\(mediaId)/likes", parameters: ["access_token":accessToken], success: { (task, response) -> Void in
+            runDELETE("media/\(mediaId)/likes", parameters:nil, success: { (task, response) -> Void in
                 successClosure()
             }, failure: { (task, error) -> Void in
-                print(error)
                 failureClosure()
             })
         }
     }
  
     public func getMediaLikes(mediaId: String ,successClosure: GetMediaLikesSuccesCompletionClosure, failureClosure: GetMediaLikesFailCompletionClosure) {
-        guard let accessToken = accessToken else {
-            return
-        }
-        httpManager.GET("media/\(mediaId)/likes", parameters: ["access_token":accessToken], progress: nil, success: { (task, response) -> Void in
+        runGET("media/\(mediaId)/likes", parameters: nil, progress: nil, success: { (task, response) -> Void in
             guard let responseJson = response, let userListJson = responseJson["data"]
                 else {
                     failureClosure()
@@ -145,9 +118,10 @@ public class IGManager: NSObject {
             if let userList = userList {
                 successClosure(userList)
             } else{
-                failureClosure()                
+                failureClosure()
             }
         }) { (task, error) -> Void in
+            print(error)
             failureClosure()
         }
     }
@@ -168,4 +142,79 @@ public class IGManager: NSObject {
             successSlosure()
         })
     }
+    
+    private func runDELETE(URLString: String, parameters: AnyObject?, success: ((NSURLSessionDataTask, AnyObject?) -> Void)?, failure: ((NSURLSessionDataTask?, NSError) -> Void)?) {
+        httpManager.DELETE(URLString, parameters: paramWithAccessToken(parameters), success: success) { [weak self] (task, error) -> Void in
+            if let response = task?.response as? NSHTTPURLResponse {
+                if response.statusCode == 400 {
+                    // need reauth
+                    self?.runClosureAfterReauth({ [weak self] () -> () in
+                        guard let _self = self else { failure?(task,error) ; return }
+                        _self.httpManager.DELETE(URLString, parameters: _self.paramWithAccessToken(parameters), success: success, failure: failure)
+                        }, failClosure: { () -> () in
+                            failure?(task,error)
+                    })
+                } else {
+                    failure?(task,error)
+                }
+            } else {
+                failure?(task,error)
+            }
+        }
+    }
+    
+    private func runPOST(URLString: String, parameters: AnyObject?, progress downloadProgress: ((NSProgress) -> Void)?, success: ((NSURLSessionDataTask, AnyObject?) -> Void)?, failure: ((NSURLSessionDataTask?, NSError) -> Void)?) {
+        httpManager.POST(URLString, parameters: paramWithAccessToken(parameters), progress: downloadProgress, success: success) { [weak self] (task, error) -> Void in
+            if let response = task?.response as? NSHTTPURLResponse {
+                if response.statusCode == 400 {
+                    // need reauth
+                    self?.runClosureAfterReauth({ [weak self] () -> () in
+                        guard let _self = self else { failure?(task,error) ; return }
+                        _self.httpManager.POST(URLString, parameters: _self.paramWithAccessToken(parameters), progress: downloadProgress, success: success, failure: failure)
+                        }, failClosure: { () -> () in
+                            failure?(task,error)
+                    })
+                } else {
+                    failure?(task,error)
+                }
+            } else {
+                failure?(task,error)
+            }
+        }
+    }
+    
+    private func runGET(URLString: String, parameters: AnyObject?, progress downloadProgress: ((NSProgress) -> Void)?, success: ((NSURLSessionDataTask, AnyObject?) -> Void)?, failure: ((NSURLSessionDataTask?, NSError) -> Void)?) {
+        httpManager.GET(URLString, parameters: paramWithAccessToken(parameters), progress: downloadProgress, success: success) { [weak self] (task, error) -> Void in
+            print(task)
+            print("================================================")
+            print(error)
+            if let response = task?.response as? NSHTTPURLResponse {
+                if response.statusCode == 400 {
+                    // need reauth
+                    self?.runClosureAfterReauth({ [weak self] () -> () in
+                        guard let _self = self else { failure?(task,error) ; return }
+                        _self.httpManager.GET(URLString, parameters: _self.paramWithAccessToken(parameters), progress: downloadProgress, success: success, failure: failure)
+                    }, failClosure: { () -> () in
+                        failure?(task,error)
+                    })
+                } else {
+                    failure?(task,error)
+                }
+            } else {
+                failure?(task,error)
+            }
+        }
+    }
+    
+    private func paramWithAccessToken(parameters: AnyObject?) -> [String: AnyObject]{
+        var paramsWithAccessToken = [String: AnyObject]()
+        if let parameters = parameters as? [String: AnyObject] {
+            for (k, v) in parameters {
+                paramsWithAccessToken.updateValue(v, forKey: k)
+            }
+        }
+        paramsWithAccessToken["access_token"] = accessToken ?? "0"
+        return paramsWithAccessToken
+    }
+    
 }
